@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Folder Include="ModelData\" />
+    <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
 </Project>
