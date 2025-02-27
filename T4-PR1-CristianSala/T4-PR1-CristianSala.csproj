@@ -7,4 +7,9 @@
     <RootNamespace>T4_PR1_CristianSala</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="ModelData\" />
+    <Folder Include="wwwroot\img\" />
+  </ItemGroup>
+
 </Project>
