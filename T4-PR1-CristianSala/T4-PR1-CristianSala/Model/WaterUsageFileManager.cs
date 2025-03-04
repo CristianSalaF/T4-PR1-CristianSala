@@ -31,7 +31,7 @@ namespace T4_PR1_CristianSala.Model
             }
         }
 
-        public List<WaterUsage> LoadConsums()
+        public List<WaterUsage> LoadUsages()
         {
             var usages = new List<WaterUsage>();
             
@@ -92,7 +92,7 @@ namespace T4_PR1_CristianSala.Model
             return usages;
         }
 
-        public void SaveConsum(WaterUsage usage)
+        public void SaveUsage(WaterUsage usage)
         {
             try
             {
@@ -131,7 +131,7 @@ namespace T4_PR1_CristianSala.Model
 
         public List<WaterUsage> GetTop10MunicipisWithHighestConsum()
         {
-            var usages = LoadConsums();
+            var usages = LoadUsages();
             int lastYear = usages.Max(c => c.Any);
             
             return usages
@@ -141,9 +141,9 @@ namespace T4_PR1_CristianSala.Model
                 .ToList();
         }
 
-        public List<dynamic> GetAverageConsumByComarca()
+        public List<dynamic> GetAverageUsageByComarca()
         {
-            var usages = LoadConsums();
+            var usages = LoadUsages();
             
             return usages
                 .GroupBy(c => c.Comarca)
@@ -156,18 +156,18 @@ namespace T4_PR1_CristianSala.Model
                 .ToList<dynamic>();
         }
 
-        public List<WaterUsage> GetSuspiciousConsumValues()
+        public List<WaterUsage> GetSuspiciousUsageValues()
         {
-            var usages = LoadConsums();
+            var usages = LoadUsages();
             
             return usages
                 .Where(c => c.Total >= 1000000) // 6 digits or more
                 .ToList();
         }
 
-        public List<dynamic> GetMunicipisWithIncreasingConsumLast5Years()
+        public List<dynamic> GetMunicipisWithIncreasingUsageLast5Years()
         {
-            var usages = LoadConsums();
+            var usages = LoadUsages();
             int lastYear = usages.Max(c => c.Any);
             int firstYear = lastYear - 4; // Last 5 years
             

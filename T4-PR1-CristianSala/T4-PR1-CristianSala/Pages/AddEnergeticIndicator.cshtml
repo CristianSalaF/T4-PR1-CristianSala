@@ -1,0 +1,128 @@
+﻿@page
+@model T4_PR1_CristianSala.Pages.AddEnergeticIndicatorModel
+@{
+    ViewData["Title"] = "Afegir Indicador Energètic";
+}
+
+<h1>Afegir nou indicador energètic</h1>
+
+<div class="row">
+    <div class="col-md-8 form-container">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="EnergeticIndicatorInput.Data" class="form-label">Any</label>
+                <input asp-for="EnergeticIndicatorInput.Data" class="form-control" value="2024" />
+                <span asp-validation-for="EnergeticIndicatorInput.Data" class="text-danger"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="EnergeticIndicatorInput.PBEE_Hidroelectr" class="form-label">Hidroelèctrica</label>
+                        <input asp-for="EnergeticIndicatorInput.PBEE_Hidroelectr" class="form-control" min="0" step="0.01" />
+                        <span asp-validation-for="EnergeticIndicatorInput.PBEE_Hidroelectr" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="EnergeticIndicatorInput.PBEE_Carbo" class="form-label">Carbó</label>
+                        <input asp-for="EnergeticIndicatorInput.PBEE_Carbo" class="form-control" min="0" step="0.01" />
+                        <span asp-validation-for="EnergeticIndicatorInput.PBEE_Carbo" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="EnergeticIndicatorInput.PBEE_GasNat" class="form-label">Gas Natural</label>
+                        <input asp-for="EnergeticIndicatorInput.PBEE_GasNat" class="form-control" min="0" step="0.01" />
+                        <span asp-validation-for="EnergeticIndicatorInput.PBEE_GasNat" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="EnergeticIndicatorInput.PBEE_FuelOil" class="form-label">Fuel-Oil</label>
+                        <input asp-for="EnergeticIndicatorInput.PBEE_FuelOil" class="form-control" min="0" step="0.01" />
+                        <span asp-validation-for="EnergeticIndicatorInput.PBEE_FuelOil" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="EnergeticIndicatorInput.PBEE_CiclComb" class="form-label">Cicle Combinat</label>
+                        <input asp-for="EnergeticIndicatorInput.PBEE_CiclComb" class="form-control" min="0" step="0.01" />
+                        <span asp-validation-for="EnergeticIndicatorInput.PBEE_CiclComb" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="EnergeticIndicatorInput.PBEE_Nuclear" class="form-label">Nuclear</label>
+                        <input asp-for="EnergeticIndicatorInput.PBEE_Nuclear" class="form-control" min="0" step="0.01" />
+                        <span asp-validation-for="EnergeticIndicatorInput.PBEE_Nuclear" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="EnergeticIndicatorInput.CDEEBC_ProdBruta" class="form-label">Producció Bruta</label>
+                        <input asp-for="EnergeticIndicatorInput.CDEEBC_ProdBruta" class="form-control" min="0" step="0.01" />
+                        <span asp-validation-for="EnergeticIndicatorInput.CDEEBC_ProdBruta" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="EnergeticIndicatorInput.CDEEBC_ConsumAux" class="form-label">Consum Auxiliar</label>
+                        <input asp-for="EnergeticIndicatorInput.CDEEBC_ConsumAux" class="form-control" min="0" step="0.01" />
+                        <span asp-validation-for="EnergeticIndicatorInput.CDEEBC_ConsumAux" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="EnergeticIndicatorInput.CDEEBC_ProdNeta" class="form-label">Producció Neta</label>
+                        <input asp-for="EnergeticIndicatorInput.CDEEBC_ProdNeta" class="form-control" min="0" step="0.01" />
+                        <span asp-validation-for="EnergeticIndicatorInput.CDEEBC_ProdNeta" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="EnergeticIndicatorInput.CDEEBC_ProdDisp" class="form-label">Producció Disponible</label>
+                        <input asp-for="EnergeticIndicatorInput.CDEEBC_ProdDisp" class="form-control" min="0" step="0.01" />
+                        <span asp-validation-for="EnergeticIndicatorInput.CDEEBC_ProdDisp" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="EnergeticIndicatorInput.CDEEBC_DemandaElectr" class="form-label">Demanda Elèctrica</label>
+                        <input asp-for="EnergeticIndicatorInput.CDEEBC_DemandaElectr" class="form-control" min="0" step="0.01" />
+                        <span asp-validation-for="EnergeticIndicatorInput.CDEEBC_DemandaElectr" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label asp-for="EnergeticIndicatorInput.CCAC_GasolinaAuto" class="form-label">Gasolina Auto</label>
+                        <input asp-for="EnergeticIndicatorInput.CCAC_GasolinaAuto" class="form-control" min="0" step="0.01" />
+                        <span asp-validation-for="EnergeticIndicatorInput.CCAC_GasolinaAuto" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Afegir</button>
+                <a asp-page="./EnergeticIndicators" class="btn btn-secondary">Tornar</a>
+            </div>
+        </form>
+    </div>
+</div>

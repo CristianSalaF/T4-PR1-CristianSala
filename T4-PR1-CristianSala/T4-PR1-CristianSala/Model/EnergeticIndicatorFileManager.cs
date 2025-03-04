@@ -196,7 +196,7 @@ namespace T4_PR1_CristianSala.Model
         {
             var indicators = LoadIndicators();
             
-            //merged && into a pattern -> i is { CDEEBC_DemandaElectr: > 4000, CDEEBC_ProdDisp: < 300 }, improved readability
+            //merged && into a pattern to improve readability
             return indicators
                 .Where(i => i is { CDEEBC_DemandaElectr: > 4000, CDEEBC_ProdDisp: < 300 })
                 .ToList();
