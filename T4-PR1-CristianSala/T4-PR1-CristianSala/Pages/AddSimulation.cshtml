@@ -1,4 +1,88 @@
 ﻿@page
 @model T4_PR1_CristianSala.Pages.AddSimulationModel
 @{
+    ViewData["Title"] = "Afegir Simulació";
+}
+
+<h1>Afegir nova simulació</h1>
+
+<div class="row">
+    <div class="col-md-8 form-container">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="SimulationInput.Type" class="form-label">Tipus de sistema</label>
+                <select asp-for="SimulationInput.Type" class="form-select">
+                    <option value="solar">Sistema Solar</option>
+                    <option value="wind">Sistema Eòlic</option>
+                    <option value="hydro">Sistema Hidroelèctric</option>
+                </select>
+                <span asp-validation-for="SimulationInput.Type" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="SimulationInput.Ratio" class="form-label">Rati (0-3]</label>
+                <input asp-for="SimulationInput.Ratio" class="form-control" min="0.01" max="3" step="0.01" />
+                <span asp-validation-for="SimulationInput.Ratio" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="SimulationInput.SolarHours" class="form-label">Hores de sol</label>
+                <input asp-for="SimulationInput.SolarHours" class="form-control" min="0" />
+                <span asp-validation-for="SimulationInput.SolarHours" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="SimulationInput.WindSpeed" class="form-label">Velocitat del vent (m/s)</label>
+                <input asp-for="SimulationInput.WindSpeed" class="form-control" min="0" />
+                <span asp-validation-for="SimulationInput.WindSpeed" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="SimulationInput.WaterFlow" class="form-label">Cabal d'aigua (m³/s)</label>
+                <input asp-for="SimulationInput.WaterFlow" class="form-control" min="0" />
+                <span asp-validation-for="SimulationInput.WaterFlow" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="SimulationInput.CostPerKWh" class="form-label">Cost per kWh (€)</label>
+                <input asp-for="SimulationInput.CostPerKWh" class="form-control" min="0" step="0.01" />
+                <span asp-validation-for="SimulationInput.CostPerKWh" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="SimulationInput.PricePerKWh" class="form-label">Preu per kWh (€)</label>
+                <input asp-for="SimulationInput.PricePerKWh" class="form-control" min="0" step="0.01" />
+                <span asp-validation-for="SimulationInput.PricePerKWh" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Afegir</button>
+                <a asp-page="./Simulations" class="btn btn-secondary">Tornar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const typeSelector = document.getElementById('@Html.IdFor(m => m.SimulationInput.Type)');
+            const solarField = document.getElementById('@Html.IdFor(m => m.SimulationInput.SolarHours)').parentElement;
+            const windField = document.getElementById('@Html.IdFor(m => m.SimulationInput.WindSpeed)').parentElement;
+            const hydroField = document.getElementById('@Html.IdFor(m => m.SimulationInput.WaterFlow)').parentElement;
+
+            function updateFieldVisibility() {
+                const selectedType = typeSelector.value;
+
+                solarField.style.display = selectedType === 'solar' ? 'block' : 'none';
+                windField.style.display = selectedType === 'wind' ? 'block' : 'none';
+                hydroField.style.display = selectedType === 'hydro' ? 'block' : 'none';
+            }
+
+            typeSelector.addEventListener('change', updateFieldVisibility);
+            updateFieldVisibility();
+        });
+    </script>
 }

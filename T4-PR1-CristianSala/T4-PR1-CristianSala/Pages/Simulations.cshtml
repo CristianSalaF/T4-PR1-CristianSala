@@ -1,4 +1,60 @@
 ﻿@page
 @model T4_PR1_CristianSala.Pages.SimulationsModel
 @{
+	ViewData["Title"] = "Simulacions";
+}
+
+<h1>Simulacions d'energies renovables</h1>
+
+<div class="mb-3">
+	<a asp-page="/AddSimulation" class="btn btn-primary">Afegir nova simulació</a>
+</div>
+
+@if (!Model.Simulations.Any())
+{
+	<div class="alert alert-info">
+		No hi ha simulacions guardades encara. Afegiu-ne una de nova.
+	</div>
+}
+else
+{
+	<div class="mb-3">
+		<p>Total de registres: <strong>@Model.Simulations.Count</strong></p>
+	</div>
+    
+	<div class="table-responsive">
+		<table class="table table-striped table-bordered">
+			<thead>
+			<tr>
+				<th>Data</th>
+				<th>Tipus</th>
+				<th>Paràmetre</th>
+				<th>Valor</th>
+				<th>Rati</th>
+				<th>Energia generada (kWh)</th>
+				<th>Cost per kWh (€)</th>
+				<th>Preu per kWh (€)</th>
+				<th>Cost total (€)</th>
+				<th>Preu total (€)</th>
+			</tr>
+			</thead>
+			<tbody>
+			@foreach (var simulation in Model.Simulations)
+			{
+				<tr>
+					<td>@simulation.SimulationDate.ToString("dd/MM/yyyy HH:mm")</td>
+					<td>@simulation.Type</td>
+					<td>@simulation.ParameterName</td>
+					<td>@simulation.ParameterValue</td>
+					<td>@simulation.Ratio</td>
+					<td>@simulation.EnergyGenerated.ToString("F2")</td>
+					<td>@simulation.CostPerKWh.ToString("F2")</td>
+					<td>@simulation.PricePerKWh.ToString("F2")</td>
+					<td>@simulation.TotalCost.ToString("F2")</td>
+					<td>@simulation.TotalPrice.ToString("F2")</td>
+				</tr>
+			}
+			</tbody>
+		</table>
+	</div>
 }
