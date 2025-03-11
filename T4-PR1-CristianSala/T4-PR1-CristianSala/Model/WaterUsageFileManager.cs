@@ -1,4 +1,7 @@
-﻿using System.Xml.Linq;
+﻿using CsvHelper;
+using System.Diagnostics;
+using System.Globalization;
+using System.Xml.Linq;
 
 namespace T4_PR1_CristianSala.Model
 {
@@ -39,30 +42,44 @@ namespace T4_PR1_CristianSala.Model
             {
                 if (File.Exists(WaterUsageFilePath))
                 {
-                    // Skip header line
-                    var lines = File.ReadAllLines(WaterUsageFilePath).Skip(1);
-                    
-                    foreach (string line in lines)
+                    using (var reader = new StreamReader(WaterUsageFilePath))
+                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
                     {
-                        string[] parts = line.Split(',');
-                        if (parts.Length < 8) continue;
+                        // Skip the header row
+                        csv.Read();
+                        csv.ReadHeader();
                         
-                        var consum = new WaterUsage
+                        // Configure CSV parsing
+                        csv.Context.TypeConverterOptionsCache.GetOptions<double>().CultureInfo = new CultureInfo("ca-ES");
+                        
+                        // Read all records
+                        while (csv.Read())
                         {
-                            Any = int.Parse(parts[0]),
-                            CodiComarca = int.Parse(parts[1]),
-                            Comarca = parts[2],
-                            Poblacio = int.Parse(parts[3]),
-                            DomesticXarxa = int.Parse(parts[4]),
-                            ActivitatsEconomiquesIFontsPropies = int.Parse(parts[5]),
-                            Total = int.Parse(parts[6]),
-                            ConsumDomesticPerCapita = double.Parse(parts[7].Replace('.', ','))
-                        };
-                        
-                        usages.Add(consum);
+                            try
+                            {
+                                var consum = new WaterUsage
+                                {
+                                    Any = csv.GetField<int>(0),
+                                    CodiComarca = csv.GetField<int>(1),
+                                    Comarca = csv.GetField<string>(2),
+                                    Poblacio = csv.GetField<int>(3),
+                                    DomesticXarxa = csv.GetField<int>(4),
+                                    ActivitatsEconomiquesIFontsPropies = csv.GetField<int>(5),
+                                    Total = csv.GetField<int>(6),
+                                    ConsumDomesticPerCapita = csv.GetField<double>(7)
+                                };
+                                
+                                usages.Add(consum);
+                            }
+                            catch
+                            {
+                                // Skip invalid rows
+                                continue;
+                            }
+                        }
                     }
                 }
-
+                
                 if (File.Exists(WaterUsageXmlPath))
                 {
                     XDocument doc = XDocument.Load(WaterUsageXmlPath);
@@ -132,6 +149,13 @@ namespace T4_PR1_CristianSala.Model
         public List<WaterUsage> GetTop10MunicipisWithHighestConsum()
         {
             var usages = LoadUsages();
+
+            if (!usages.Any()) 
+            {
+                Debug.WriteLine("No data was loaded from CSV or XML.");
+                return new List<WaterUsage>(); // Prevents crash
+            }
+
             int lastYear = usages.Max(c => c.Any);
             
             return usages
@@ -168,6 +192,13 @@ namespace T4_PR1_CristianSala.Model
         public List<dynamic> GetMunicipisWithIncreasingUsageLast5Years()
         {
             var usages = LoadUsages();
+
+            if (!usages.Any()) 
+            {
+                Debug.WriteLine("No data was loaded from CSV or XML.");
+                return new List<dynamic>(); // Prevents crash
+            }
+
             int lastYear = usages.Max(c => c.Any);
             int firstYear = lastYear - 4; // Last 5 years
             
