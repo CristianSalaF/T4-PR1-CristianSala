@@ -1,4 +1,156 @@
 ﻿@page
 @model T4_PR1_CristianSala.Pages.WaterUsagesModel
 @{
+    ViewData["Title"] = "Consums d'aigua";
+}
+
+<h1>Consums d'aigua per comarques</h1>
+
+<div class="mb-3">
+    <a asp-page="/AddWaterUsage" class="btn btn-primary">Afegir nou consum</a>
+</div>
+
+@if (!Model.Usages.Any())
+{
+    <div class="alert alert-info">
+        No hi ha dades de consum d'aigua disponibles.
+    </div>
+}
+else
+{
+    <div class="mb-3">
+        <p>Total de registres: <strong>@Model.Usages.Count</strong></p>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Any</th>
+                    <th>Codi comarca</th>
+                    <th>Comarca</th>
+                    <th>Població</th>
+                    <th>Domèstic xarxa</th>
+                    <th>Activitats econòmiques</th>
+                    <th>Total</th>
+                    <th>Consum per càpita</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var usage in Model.Usages)
+                {
+                    <tr>
+                        <td>@usage.Any</td>
+                        <td>@usage.CodiComarca</td>
+                        <td>@usage.Comarca</td>
+                        <td>@usage.Poblacio</td>
+                        <td>@usage.DomesticXarxa</td>
+                        <td>@usage.ActivitatsEconomiquesIFontsPropies</td>
+                        <td>@usage.Total</td>
+                        <td>@usage.ConsumDomesticPerCapita.ToString("F2")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <hr />
+
+    <h2>Anàlisi estadístiques</h2>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="stats-card">
+                <h4>Top 10 municipis amb més consum d'aigua</h4>
+                @if (Model.Top10Municipis.Any())
+                {
+                    <ul class="list-group">
+                        @foreach (var municipi in Model.Top10Municipis)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                @municipi.Comarca
+                                <span class="badge bg-primary rounded-pill">@municipi.Total</span>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p>No hi ha dades disponibles</p>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="stats-card">
+                <h4>Consum mitjà per comarca</h4>
+                @if (Model.AverageConsumByComarca.Any())
+                {
+                    <ul class="list-group">
+                        @foreach (var item in Model.AverageConsumByComarca)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                @item.Comarca
+                                <span class="badge bg-primary rounded-pill">@(Math.Round(item.AverageConsum, 2))</span>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p>No hi ha dades disponibles</p>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="stats-card">
+                <h4>Valors de consum sospitosos</h4>
+                @if (Model.SuspiciousValues.Any())
+                {
+                    <ul class="list-group">
+                        @foreach (var municipi in Model.SuspiciousValues)
+                        {
+                            <li class="list-group-item">
+                                @municipi.Comarca (@municipi.Any): @municipi.Total
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p>No hi ha valors sospitosos</p>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="stats-card">
+                <h4>Municipis amb tendència creixent (últims 5 anys)</h4>
+                @if (Model.MunicipisWithIncreasingTrend.Any())
+                {
+                    <ul class="list-group">
+                        @foreach (var item in Model.MunicipisWithIncreasingTrend)
+                        {
+                            <li class="list-group-item">
+                                @item.Comarca
+                                <small class="d-block text-muted">
+                                    @foreach (var yearData in item.ConsumsPerYear)
+                                    {
+                                        <span class="me-2">@yearData.Any: @yearData.Total</span>
+                                    }
+                                </small>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p>No hi ha municipis amb tendència creixent</p>
+                }
+            </div>
+        </div>
+    </div>
 }

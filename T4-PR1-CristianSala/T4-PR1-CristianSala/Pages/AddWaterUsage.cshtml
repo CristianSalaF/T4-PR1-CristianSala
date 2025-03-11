@@ -1,4 +1,68 @@
 ﻿@page
 @model T4_PR1_CristianSala.Pages.AddWaterUsageModel
 @{
+    ViewData["Title"] = "Afegir Consum d'Aigua";
 }
+
+<h1>Afegir nou consum d'aigua</h1>
+
+<div class="row">
+    <div class="col-md-8 form-container">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="UsageInputModel.Any" class="form-label">Any</label>
+                <input asp-for="UsageInputModel.Any" class="form-control" value="2024" />
+                <span asp-validation-for="UsageInputModel.Any" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="UsageInputModel.CodiComarca" class="form-label">Codi comarca</label>
+                <input asp-for="UsageInputModel.CodiComarca" class="form-control" />
+                <span asp-validation-for="UsageInputModel.CodiComarca" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="UsageInputModel.Comarca" class="form-label">Comarca</label>
+                <input asp-for="UsageInputModel.Comarca" class="form-control" />
+                <span asp-validation-for="UsageInputModel.Comarca" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="UsageInputModel.Poblacio" class="form-label">Població</label>
+                <input asp-for="UsageInputModel.Poblacio" class="form-control" min="0" />
+                <span asp-validation-for="UsageInputModel.Poblacio" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="UsageInputModel.DomesticXarxa" class="form-label">Domèstic xarxa</label>
+                <input asp-for="UsageInputModel.DomesticXarxa" class="form-control" min="0" />
+                <span asp-validation-for="UsageInputModel.DomesticXarxa" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="UsageInputModel.ActivitatsEconomiquesIFontsPropies" class="form-label">Activitats econòmiques i fonts pròpies</label>
+                <input asp-for="UsageInputModel.ActivitatsEconomiquesIFontsPropies" class="form-control" min="0" />
+                <span asp-validation-for="UsageInputModel.ActivitatsEconomiquesIFontsPropies" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="UsageInputModel.Total" class="form-label">Total</label>
+                <input asp-for="UsageInputModel.Total" class="form-control" min="0" />
+                <span asp-validation-for="UsageInputModel.Total" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="UsageInputModel.ConsumDomesticPerCapita" class="form-label">Consum domèstic per càpita</label>
+                <input asp-for="UsageInputModel.ConsumDomesticPerCapita" class="form-control" min="0" step="0.01" />
+                <span asp-validation-for="UsageInputModel.ConsumDomesticPerCapita" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Afegir</button>
+                <a asp-page="./WaterUsages" class="btn btn-secondary">Tornar</a>
+            </div>
+        </form>
+    </div>
+</div>
