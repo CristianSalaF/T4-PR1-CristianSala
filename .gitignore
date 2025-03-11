@@ -398,3 +398,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/T4-PR1-CristianSala/T4-PR1-CristianSala/ModelData
