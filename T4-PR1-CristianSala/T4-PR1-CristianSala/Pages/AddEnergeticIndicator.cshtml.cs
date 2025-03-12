@@ -65,7 +65,10 @@ namespace T4_PR1_CristianSala.Pages
             [Range(0, double.MaxValue, ErrorMessage = "El valor ha de ser positiu")]
             public double CCAC_GasolinaAuto { get; set; }
         }
-
+        /// <summary>
+        /// Saves the energetic indicator to the file
+        /// </summary>
+        /// <returns></returns>
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)

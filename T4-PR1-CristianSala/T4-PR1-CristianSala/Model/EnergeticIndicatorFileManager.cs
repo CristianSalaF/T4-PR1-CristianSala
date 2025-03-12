@@ -12,6 +12,9 @@ namespace T4_PR1_CristianSala.Model
             FileExistsOrCreateJson();
         }
 
+        /// <summary>
+        /// Checks if the JSON file exists and creates it if it doesn't
+        /// </summary>
         private void FileExistsOrCreateJson()
         {
             string? directory = Path.GetDirectoryName(IndicadorsJsonPath);
@@ -27,6 +30,10 @@ namespace T4_PR1_CristianSala.Model
             }
         }
 
+        /// <summary>
+        /// Loads the energy indicators from the CSV file and JSON file
+        /// </summary>
+        /// <returns></returns>
         public List<EnergeticIndicator> LoadIndicators()
         {
             var indicators = new List<EnergeticIndicator>();
@@ -116,6 +123,11 @@ namespace T4_PR1_CristianSala.Model
             return indicators;
         }
 
+        /// <summary>
+        /// Parses a string to a double, replacing '.' with ',' to handle different number formats
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         private double ParseDouble(string value)
         {
             if (double.TryParse(value.Replace('.', ','), out double result))
@@ -125,6 +137,10 @@ namespace T4_PR1_CristianSala.Model
             return 0;
         }
 
+        /// <summary>
+        /// Saves an energy indicator to the JSON file
+        /// </summary>
+        /// <param name="indicator"></param>
         public void SaveIndicator(EnergeticIndicator indicator)
         {
             try
@@ -156,6 +172,10 @@ namespace T4_PR1_CristianSala.Model
             }
         }
 
+        /// <summary>
+        /// Returns the records with net production greater than 3000
+        /// </summary>
+        /// <returns></returns>
         public List<EnergeticIndicator> GetRecordsWithProdNetaGreaterThan3000()
         {
             var indicators = LoadIndicators();
@@ -166,6 +186,10 @@ namespace T4_PR1_CristianSala.Model
                 .ToList();
         }
 
+        /// <summary>
+        /// Returns the records with GasolinaAuto greater than 100
+        /// </summary>
+        /// <returns></returns>
         public List<EnergeticIndicator> GetRecordsWithGasolinaGreaterThan100()
         {
             var indicators = LoadIndicators();
@@ -176,6 +200,10 @@ namespace T4_PR1_CristianSala.Model
                 .ToList();
         }
 
+        /// <summary>
+        /// Returns the average net production per year
+        /// </summary>
+        /// <returns></returns>
         public List<dynamic> GetAverageProdNetaPerYear()
         {
             var indicators = LoadIndicators();
@@ -192,6 +220,10 @@ namespace T4_PR1_CristianSala.Model
                 .ToList<dynamic>();
         }
 
+        /// <summary>
+        /// Returns the records with high demand and low production
+        /// </summary>
+        /// <returns></returns>
         public List<EnergeticIndicator> GetRecordsWithHighDemandAndLowProduction()
         {
             var indicators = LoadIndicators();

@@ -8,8 +8,11 @@
     {
         FileExistsOrDefault();
     }
-    
-    private void FileExistsOrDefault()
+
+        /// <summary>
+        /// Checks if the file exists, if not, creates it with the header line
+        /// </summary>
+        private void FileExistsOrDefault()
     {
         string? directory = Path.GetDirectoryName(SimulationsFilePath);
         if (!Directory.Exists(directory))
@@ -25,8 +28,12 @@
             }
         }
     }
-    
-    public List<BaseSimulation> LoadSimulations()
+
+        /// <summary>
+        /// Loads all simulations from the file
+        /// </summary>
+        /// <returns></returns>
+        public List<BaseSimulation> LoadSimulations()
     {
         var simulations = new List<BaseSimulation>();
         
@@ -80,8 +87,12 @@
         
         return simulations;
     }
-    
-    public void SaveSimulation(BaseSimulation simulation)
+
+        /// <summary>
+        /// Saves a simulation to the file
+        /// </summary>
+        /// <param name="simulation"></param>
+        public void SaveSimulation(BaseSimulation simulation)
     {
         try
         {

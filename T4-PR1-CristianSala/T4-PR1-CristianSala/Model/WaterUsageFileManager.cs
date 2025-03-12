@@ -15,6 +15,9 @@ namespace T4_PR1_CristianSala.Model
             FileExistsOrCreateXml();
         }
 
+        /// <summary>
+        /// Checks if the file exists, if not, creates it with the header line
+        /// </summary>
         private void FileExistsOrCreateXml()
         {
             string? directory = Path.GetDirectoryName(WaterUsageXmlPath);
@@ -34,6 +37,10 @@ namespace T4_PR1_CristianSala.Model
             }
         }
 
+        /// <summary>
+        /// Loads all water consumption data from the file
+        /// </summary>
+        /// <returns></returns>
         public List<WaterUsage> LoadUsages()
         {
             var usages = new List<WaterUsage>();
@@ -109,6 +116,10 @@ namespace T4_PR1_CristianSala.Model
             return usages;
         }
 
+        /// <summary>
+        /// Saves a water consumption record to the file
+        /// </summary>
+        /// <param name="usage"></param>
         public void SaveUsage(WaterUsage usage)
         {
             try
@@ -146,6 +157,10 @@ namespace T4_PR1_CristianSala.Model
             }
         }
 
+        /// <summary>
+        /// Gets the top 10 municipis with the highest water consumption in the last year
+        /// </summary>
+        /// <returns></returns>
         public List<WaterUsage> GetTop10MunicipisWithHighestConsum()
         {
             var usages = LoadUsages();
@@ -165,6 +180,10 @@ namespace T4_PR1_CristianSala.Model
                 .ToList();
         }
 
+        /// <summary>
+        /// Gets the average water consumption by comarca
+        /// </summary>
+        /// <returns></returns>
         public List<dynamic> GetAverageUsageByComarca()
         {
             var usages = LoadUsages();
@@ -180,6 +199,10 @@ namespace T4_PR1_CristianSala.Model
                 .ToList<dynamic>();
         }
 
+        /// <summary>
+        /// Gets the municipis with suspicious water consumption values
+        /// </summary>
+        /// <returns></returns>
         public List<WaterUsage> GetSuspiciousUsageValues()
         {
             var usages = LoadUsages();
@@ -189,6 +212,10 @@ namespace T4_PR1_CristianSala.Model
                 .ToList();
         }
 
+        /// <summary>
+        /// Gets the comarques with increasing water consumption in the last 5 years
+        /// </summary>
+        /// <returns></returns>
         public List<dynamic> GetMunicipisWithIncreasingUsageLast5Years()
         {
             var usages = LoadUsages();
